@@ -1,1 +1,1 @@
-# event-management-app
+# event-manager
