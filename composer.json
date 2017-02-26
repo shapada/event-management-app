@@ -1,0 +1,23 @@
+{
+	"name": "front-row-entertainment/event-manager",
+	"description": "Core functionality for the Event Manager application.",
+	"type": "wordpress-plugin",
+	"minimum-stability": "dev",
+	"authors": [
+		{
+			"name": "Front Row Entertainment",
+			"homepage": "http://event-manager.dev"
+		}
+	],
+	"autoload": {
+		"psr-4": {
+			"EventManager\\": "includes/EventManager/"
+		},
+		"files": [
+			"includes/functions/taxonomy-helpers.php"
+		]
+	},
+	"require": {
+		"composer/installers": "~1.0"
+	}
+}
