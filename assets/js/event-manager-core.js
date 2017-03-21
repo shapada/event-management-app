@@ -69,28 +69,28 @@
           },
           editable: true,
           events: [{
-            title: 'Venue 1',
+            title: 'Event 1',
             start: new Date(y, m, 1)
           }, {
-            title: 'Venue 2',
+            title: 'Event 2',
             start: new Date(y, m, d - 5),
             end: new Date(y, m, d - 2)
           }, {
-            title: 'Venue 3',
+            title: 'Event 3',
             start: new Date(y, m, d, 10, 30),
             allDay: false
           }, {
-            title: 'Venue 4',
+            title: 'Event 4',
             start: new Date(y, m, d + 14, 12, 0),
             end: new Date(y, m, d, 14, 0),
             allDay: false
           }, {
-            title: 'Venue 5',
+            title: 'Event 5',
             start: new Date(y, m, d + 1, 19, 0),
             end: new Date(y, m, d + 1, 22, 30),
             allDay: false
           }, {
-            title: 'Venue 6',
+            title: 'Event 6',
             start: new Date(y, m, 28),
             end: new Date(y, m, 29),
             url: 'http://google.com/'

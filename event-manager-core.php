@@ -21,14 +21,14 @@ define( 'EVENT_MANAGER_CORE_INCLUDES', EVENT_MANAGER_CORE_ABSPATH . '/includes' 
  * @return \EventManager\Core Global instance of the Core class.
  */
 function event_manager_core() {
-	global $event_manager;
+	global $event_manager_core;
 
-	if ( empty( $event_manager ) ) {
-		$event_manager = new EventManager\Core();
-		$event_manager->register();
+	if ( empty( $event_manager_core ) ) {
+		$event_manager_core = new EventManager\Core();
+		$event_manager_core->register();
 	}
 
-	return $event_manager;
+	return $event_manager_core;
 }
 
 event_manager_core();

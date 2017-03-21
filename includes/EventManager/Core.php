@@ -2,10 +2,23 @@
 
 namespace EventManager;
 
+use EventManager\Entertainer;
+use EventManager\Venue;
+
 /**
  * Core functionality for the Event Manager Application
  */
 class Core {
+
+	/**
+	 * @var \EventManager\Entertainer
+	 */
+	public $entertainer;
+
+	/**
+	 * @var \EventManager\Venue
+	 */
+	public $venue;
 
 	/**
 	 * Constructor.
@@ -14,6 +27,9 @@ class Core {
 	 */
 	public function __construct() {
 
+		$this->entertainer = new Entertainer();
+		$this->venue = new Venue();
+
 		do_action( 'event_manager_core_init' );
 	}
 
@@ -21,6 +37,10 @@ class Core {
 	 * Register hooks and actions.
 	 */
 	public function register() {
+
+		$this->entertainer->register();
+		$this->venue->register();
+
 		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
 
 		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_styles' ] );
@@ -89,8 +109,8 @@ class Core {
 		);
 
 		wp_enqueue_style(
-			'event-manager-fa', 
-			"https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+			'event-manager-fa',
+			EVENT_MANAGER_CORE_ABSURL . "/assets/fonts/css/font-awesome.min.css"
 		);
 	}
 }

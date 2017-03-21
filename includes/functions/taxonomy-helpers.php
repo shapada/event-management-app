@@ -1,5 +1,5 @@
 <?php
-namespace Mayo\Helpers\Taxonomies;
+namespace EventManager\Helpers\Taxonomies;
 
 /**
  * Loop through an array of term IDs and include any child terms they have.
