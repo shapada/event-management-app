@@ -2,8 +2,6 @@
 
 namespace EventManager\Taxonomies;
 
-use EventManager\Taxonomies\BaseTaxonomy;
-
 class EntertainerTypeTaxonomy extends BaseTaxonomy {
 
 	/**
