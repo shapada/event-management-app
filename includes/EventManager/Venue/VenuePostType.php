@@ -6,6 +6,7 @@ use EventManager\PostTypes\AbstractVenuePostType;
 
 class VenuePostType extends AbstractVenuePostType {
 
+
 	public $data_source = 'venue';
 
 	public $post_type_slug = 'venue';

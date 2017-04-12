@@ -6,6 +6,11 @@ use EventManager\Taxonomies\BaseTaxonomy;
 
 class VenueTypeTaxonomy extends BaseTaxonomy {
 
+	/**
+	 * The taxonomy name
+	 *
+	 * @var string The name of the taxonomy
+	 */
 	public $name = 'venue_type';
 
 	/**

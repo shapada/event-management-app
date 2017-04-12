@@ -4,14 +4,13 @@ namespace EventManager\Taxonomies;
 
 use EventManager\Taxonomies\BaseTaxonomy;
 
-class EntertainerTypeTaxonomy extends BaseTaxonomy {
+class VenueLocationTaxonomy extends BaseTaxonomy {
 
 	/**
 	 * The taxonomy name
-	 *
-	 * @var string Thename of the taxonomy
+	 * @var string The taxonomy name
 	 */
-	public $name = 'entertainer_type';
+	public $name = 'venue_location';
 
 	/**
 	 * Constructor.
@@ -50,7 +49,7 @@ class EntertainerTypeTaxonomy extends BaseTaxonomy {
 	 * @return string The taxonomy name.
 	 */
 	public function get_post_types() {
-		return event_manager_core()->entertainer->get_cpts();
+		return event_manager_core()->venue->get_cpts();
 	}
 
 	/**
@@ -59,7 +58,7 @@ class EntertainerTypeTaxonomy extends BaseTaxonomy {
 	 * @return string
 	 */
 	public function get_singular_label() {
-		return 'Entertainer Type';
+		return 'Venue Location';
 	}
 
 	/**
@@ -68,7 +67,7 @@ class EntertainerTypeTaxonomy extends BaseTaxonomy {
 	 * @return string
 	 */
 	public function get_plural_label() {
-		return 'Entertainer Types';
+		return 'Venue Locations';
 	}
 
 	/**
