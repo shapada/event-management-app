@@ -14,7 +14,8 @@
 			"EventManager\\": "includes/EventManager/"
 		},
 		"files": [
-			"includes/functions/taxonomy-helpers.php"
+			"includes/functions/taxonomy-helpers.php",
+			"includes/functions/helpers.php"
 		]
 	},
 	"require": {

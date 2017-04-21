@@ -9,6 +9,9 @@
 
 // Include the autoloader
 require_once __DIR__ . '/vendor/autoload.php';
+if ( ! class_exists( 'WP_List_Table' ) ) {
+	require_once( ABSPATH . 'wp-admin/includes/class-wp-list-table.php' );
+}
 
 define( 'EVENT_MANAGER_CORE_VERSION', '1.0' );
 define( 'EVENT_MANAGER_CORE_ABSURL',  plugins_url( '/', __FILE__ ) );
