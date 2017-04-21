@@ -4,7 +4,7 @@ namespace EventManager;
 
 use EventManager\Taxonomies\VenueLocationTaxonomy;
 use EventManager\Taxonomies\VenueTypeTaxonomy;
-use EventManager\Venue\VenuePostType;
+use EventManager\Venues\VenuePostType;
 
 class Venue {
 

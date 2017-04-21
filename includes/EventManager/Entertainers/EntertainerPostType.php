@@ -1,15 +1,14 @@
 <?php
 
-namespace EventManager\Venue;
+namespace EventManager\Entertainers;
 
-use EventManager\PostTypes\AbstractVenuePostType;
+use EventManager\PostTypes\AbstractEntertainerPostType;
 
-class VenuePostType extends AbstractVenuePostType {
+class EntertainerPostType extends AbstractEntertainerPostType {
 
+	public $data_source = 'entertainer';
 
-	public $data_source = 'venue';
-
-	public $post_type_slug = 'venue';
+	public $post_type_slug = 'entertainer';
 
 	/**
 	 * Constructor.

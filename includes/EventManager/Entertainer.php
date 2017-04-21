@@ -2,7 +2,7 @@
 
 namespace EventManager;
 
-use EventManager\Entertainer\EntertainerPostType;
+use EventManager\Entertainers\EntertainerPostType;
 
 use EventManager\Taxonomies\EntertainerTypeTaxonomy;
 
