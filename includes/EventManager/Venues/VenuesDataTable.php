@@ -31,7 +31,7 @@ class VenuesDataTable extends AbstractWPQueryDataTable {
 	 * @param  Column $column The column the row item belongs to.
 	 */
 	public function render_type_item( \WP_Post $row, Column $column ) {
-		echo 'Venue Type Test';
+		echo 'Venue Type';
 		//$this->render_taxonomy_item( $row, $column, event_manager_core()->locations->location_taxonomy->get_name() );
 	}
 
