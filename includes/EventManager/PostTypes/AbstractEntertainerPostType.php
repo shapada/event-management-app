@@ -60,7 +60,7 @@ abstract class AbstractEntertainerPostType extends BasePostType {
 				'revisions',
 			),
 			'rewrite'      => array(
-				'slug' => $this->get_data_source() . '-text'
+				'slug' => $this->get_data_source()
 			),
 		);
 
