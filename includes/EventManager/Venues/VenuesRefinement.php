@@ -26,7 +26,8 @@ class VenuesRefinement extends AbstractRefinement {
 	protected function set_data_table() {
 		$this->data_table = new VenuesDataTable();
 
-		$this->data_table->add_column( new Column( 'Title', 'title', true ) );
+		$this->data_table->add_column( new Column( 'Name', 'title', true ) );
+		$this->data_table->add_column( new Column( 'Type', 'type' ) );
 		$this->data_table->add_column( new Column( 'Location', 'location' ) );
 		$this->data_table->set_facets( $this->facets );
 	}

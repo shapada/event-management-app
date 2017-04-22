@@ -25,13 +25,24 @@ class VenuesDataTable extends AbstractWPQueryDataTable {
 	}
 
 	/**
+	 * Render a venue type row item.
+	 *
+	 * @param  \WP_Post $row The row data.
+	 * @param  Column $column The column the row item belongs to.
+	 */
+	public function render_location_type( \WP_Post $row, Column $column ) {
+		echo 'Venue Type Test';
+		//$this->render_taxonomy_item( $row, $column, event_manager_core()->locations->location_taxonomy->get_name() );
+	}
+
+	/**
 	 * Render a location row item.
 	 *
 	 * @param  \WP_Post $row The row data.
 	 * @param  Column $column The column the row item belongs to.
 	 */
 	public function render_location_item( \WP_Post $row, Column $column ) {
-		echo 'Location test';
+		echo 'Location Test';
 		//$this->render_taxonomy_item( $row, $column, event_manager_core()->locations->location_taxonomy->get_name() );
 	}
 
