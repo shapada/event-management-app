@@ -17,7 +17,7 @@ class VenuesRefinement extends AbstractRefinement {
 	 * Set the facets.
 	 */
 	protected function set_facets() {
-		$this->facets = null;
+		$this->facets = new VenuesFacet( $this->data_source );
 	}
 
 	/**
@@ -27,10 +27,7 @@ class VenuesRefinement extends AbstractRefinement {
 		$this->data_table = new VenuesDataTable();
 
 		$this->data_table->add_column( new Column( 'Title', 'title', true ) );
-		$this->data_table->add_column( new Column( 'Category', mayo_core()->education->education_type_taxonomy->get_name() ) );
 		$this->data_table->add_column( new Column( 'Location', 'location' ) );
-		$this->data_table->add_column( new Column( 'Bookmark', 'bookmark' ) );
-
 		$this->data_table->set_facets( $this->facets );
 	}
 

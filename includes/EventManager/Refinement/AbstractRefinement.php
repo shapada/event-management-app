@@ -41,7 +41,8 @@ abstract class AbstractRefinement {
 			$this->facets->register();
 		}
 
-		add_filter( "event_manager_refine_results_for_{$this->data_source}", array( $this->data_table, 'refine_results' ), 10, 2 );
+		add_filter( "event_manager_refine_results_for_{$this->data_source}",
+			array( $this->data_table, 'refine_results' ), 10, 2 );
 	}
 
 	public function render_facets() {

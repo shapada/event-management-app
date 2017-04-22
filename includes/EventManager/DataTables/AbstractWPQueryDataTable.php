@@ -76,13 +76,6 @@ abstract class AbstractWPQueryDataTable extends AbstractDataTable {
 			'no_found_rows' => false,
 		);
 
-		// Use Elasticsearch for this query, if available.
-		if ( $this->should_use_elastic_search() ) {
-			$args['ep_integrate'] = true;
-		} else {
-			$args['ep_integrate'] = false;
-		}
-
 		if ( ! empty( $_GET['currentPage'] ) ) {
 			$args['paged'] = absint( $_GET['currentPage'] );
 		}
@@ -157,37 +150,20 @@ abstract class AbstractWPQueryDataTable extends AbstractDataTable {
 	 * @param  \WP_Post $row The row data.
 	 * @param  \EventManager\DataTables\Column $column The column this item belongs to.
 	 */
-	public function render_title_item( \WP_Post $row, \EventManager\DataTables\Column $column ) {
+	public function render_title_item( \WP_Post $row, Column $column ) {
 		if ( ! is_a( $row, 'WP_Post' ) ) {
 			$this->render_default_item( $row, $column );
 		}
 
 		$classes = $this->get_row_classes( $row, $column ); ?>
 
-		<a href="<?php echo esc_url( get_the_permalink( $row ) ) ?>" <?php if ( ! empty( $classes ) ) { echo 'class="' . esc_attr( $classes ) . '"'; } if ( $this->open_title_link_in_new_tab( $row ) ) { ?> target="_blank" <?php } ?> >
+		<a href="<?php echo esc_url( get_the_permalink( $row ) ) ?>" <?php if ( ! empty( $classes ) ) { echo 'class="' . esc_attr( $classes ) . '"'; } ?> >
 			<?php echo esc_html( get_the_title( $row ) ) ?>
 		</a>
 
 	<?php
 	}
 
-
-	/**
-	 * Returns a flag that verifies if a title link needs to open in a new tab.
-	 * @param \WP_Post $row
-	 *
-	 * @return bool
-	 */
-	public function open_title_link_in_new_tab( \WP_Post $row ) {
-		//Currently, for the link post types retrieve the "open in new tab" flag
-		if ( $row->post_type === event_manager_core()->education->education_link_cpt->post_type_slug ) {
-			return event_manager_core()->education->education_link_cpt->open_link_in_new_tab( $row->ID );
-		} elseif ( $row->post_type === event_manager_core()->resources->links->post_type_slug ) {
-			return event_manager_core()->resources->links->open_link_in_new_tab( $row->ID );
-		}
-
-		return false;
-	}
 	/**
 	 * Render a taxonomy row item.
 	 *
@@ -243,66 +219,23 @@ abstract class AbstractWPQueryDataTable extends AbstractDataTable {
 			return;
 		}
 
-		// Get this out of the way: if there is only one, we don't need all the looping.
-		if ( count( $terms ) === 1 ) {
-			$term = $terms[0];
-			echo \EventManager\Helpers\location_icon( $term->term_id );
-			return;
-		}
-
 		$termsHierarchy = array();
 		\EventManager\Helpers\sort_terms_hierarchically( $terms, $termsHierarchy );
 
-		// I'm sorry, Dave. I'm afraid I can't do that.
 		if ( empty( $termsHierarchy ) ) {
 			return;
 		}
 
 		ob_start();
 
-		?><div class="location-wrap"><?php
-
 		foreach ( $termsHierarchy as $term ) {
 			if ( ! is_a( $term, 'WP_Term' ) ) {
 				continue;
-			}
-
-			?><div class="location-list -<?php echo esc_attr( strtolower( $term->slug ) ); ?>"><?php
-			// echo Parent
-			echo \EventManager\Helpers\location_icon( $term->term_id );
-
-			if ( ! empty( $term->children ) ) {
-				?><ul class="child-list"><?php
-				foreach ( $term->children as $child ) {
-					?><li class="child"><?php echo esc_html( $child->name ); ?></li><?php
-				}
-				?></ul><?php
-			}
-			?></div><?php
+			} ?>
+			<?php
 		}
-		?></div><?php
 
 		ob_get_flush();
-	}
-
-	/**
-	 * Determine if the query for the table should use Elasticsearch.
-	 *
-	 * @return boolean
-	 */
-	public function should_use_elastic_search() {
-		if ( ! isset( $this->query_args['ep_integrate'] ) ) {
-			return true;
-		}
-
-		if (
-			isset( $this->query_args['ep_integrate'] ) &&
-			false === $this->query_args['ep_integrate']
-		) {
-			return false;
-		}
-
-		return true;
 	}
 
 	/**
@@ -340,16 +273,6 @@ abstract class AbstractWPQueryDataTable extends AbstractDataTable {
 		$args = $this->get_query_args();
 		$args = array_merge( $args, $query_args );
 
-		/**
-		 * If `ep_integrate` is set `s` will be ignored, so we
-		 * need to remove `ep_integrate`
-		 *
-		 * See: wp-content/plugins/elasticpress/classes/class-ep-api.php:1524
-		 */
-		if ( ! empty( $args['s'] ) ) {
-			unset( $args['ep_integrate'] );
-		}
-
 		$args = apply_filters( 'event_manager_filter_refine_results_args', $args );
 
 		$this->set_query_args( $args );
@@ -369,19 +292,12 @@ abstract class AbstractWPQueryDataTable extends AbstractDataTable {
 	 * @param  \EventManager\DataTables\Column $column The column this item belongs to.
 	 * @return string
 	 */
-	public function get_row_classes( \WP_Post $row, \EventManager\DataTables\Column $column ) {
+	public function get_row_classes( \WP_Post $row, Column $column ) {
 		if ( ! is_a( $row, 'WP_Post' ) ) {
 			return;
 		}
 
-
 		$classes = esc_attr( $row->post_type );
-
-		$filetype = \EventManager\Helpers\get_post_filetype( $row );
-		if ( ! empty( $filetype ) ) {
-			$classes .= ' ' . $filetype;
-		}
-
 		return $classes;
 	}
 }

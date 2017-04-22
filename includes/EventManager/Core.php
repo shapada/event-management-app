@@ -2,9 +2,6 @@
 
 namespace EventManager;
 
-use EventManager\Entertainer;
-use EventManager\Venue;
-
 /**
  * Core functionality for the Event Manager Application
  */
@@ -21,12 +18,18 @@ class Core {
 	public $venue;
 
 	/**
+	 * @var \EventManager\Refinement
+	 */
+	public $refinement;
+
+	/**
 	 * Constructor.
 	 *
 	 * @access public
 	 */
 	public function __construct() {
 
+		$this->refinement = new Refinement();
 		$this->entertainer = new Entertainer();
 		$this->venue = new Venue();
 
@@ -38,6 +41,7 @@ class Core {
 	 */
 	public function register() {
 
+		$this->refinement->register();
 		$this->entertainer->register();
 		$this->venue->register();
 

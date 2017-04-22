@@ -21,18 +21,7 @@ class EntertainersDataTable extends AbstractWPQueryDataTable {
 		if ( ! empty( $search_term ) ) {
 			$this->query_args['s'] = $search_term;
 		}
-		$this->query_args['meta_key'] = "mayo_link_open_new_tab";
 		return parent::get_rows();
-	}
-
-	/**
-	 * Render a type row item.
-	 *
-	 * @param  \WP_Post $row The row data.
-	 * @param  Column $column The column the row item belongs to.
-	 */
-	public function render_mayo_education_type_item( \WP_Post $row, Column $column ) {
-		$this->render_taxonomy_item( $row, $column, event_manager_core()->education->education_type_taxonomy->get_name() );
 	}
 
 	/**

@@ -111,15 +111,17 @@ abstract class AbstractDataTable {
 	 * Renter the table.
 	 */
 	public function render() { ?>
-		<div class="data-table">
-			<?php $this->render_search(); ?>
-			<div class="table-wrap">
-				<?php
-				$this->render_header();
-				$this->render_rows(); ?>
-			</div>
+        <div class="table-responsive">
+            <table class="table table-striped jambo_table bulk_action">
+                <thead>
+                    <tr class="headings">
+				        <?php $this->render_header(); ?>
+				    </tr>
+                <tbody>
+                    <?php $this->render_rows(); ?>
+                </tbody>
+            </table>
 		</div>
-		<?php $this->render_footer(); ?>
 	<?php
 	}
 
@@ -136,29 +138,27 @@ abstract class AbstractDataTable {
 	 * Render the table's header.
 	 */
 	public function render_header() { ?>
-		<div class="table-header">
-			<?php
-			foreach( $this->get_columns() as $column ) {
-				if ( ! is_a( $column, '\EventManager\DataTables\Column' ) ) {
-					continue;
-				} ?>
+        <?php
+            foreach( $this->get_columns() as $column ) {
+            if ( ! is_a( $column, '\EventManager\DataTables\Column' ) ) {
+                continue;
+            } ?>
 
-				<div class="<?php echo esc_attr( $column->get_id() ) ?>">
-					<?php
-					switch ( $column->is_sortable() ) {
-						case true: ?>
-							<button class="small-heading -sortable"><?php echo esc_html( $column->get_title() ) ?></button>
-							<?php
-							break;
+            <th class="<?php echo esc_attr( $column->get_id() ) ?>">
+                <?php
+                    switch ( $column->is_sortable() ) {
+                        case true: ?>
+                            <span><i class="fa fa-chevron-down"></i> <?php echo esc_html( $column->get_title() ) ?></span>
+                            <?php
+                            break;
 
-						default:
-							echo esc_html( $column->get_title() );
-							break;
-					} ?>
-				</div>
-			<?php
-			} ?>
-		</div>
+                        default:
+                            echo esc_html( $column->get_title() );
+                            break;
+                    }
+                }
+                ?>
+            </th>
 	<?php
 	}
 
@@ -185,19 +185,6 @@ abstract class AbstractDataTable {
 	}
 
 	/**
-	 * Get the pre-rendered footer for the table. Useful for updating table results using AJAX.
-	 *
-	 * @return string The rendered footer.
-	 */
-	public function get_rendered_footer() {
-		ob_start();
-		$this->render_footer();
-		$html = ob_get_clean();
-
-		return $html;
-	}
-
-	/**
 	 * Get the pre-rendered header for the table. Useful for updating table results using AJAX.
 	 *
 	 * @return string The rendered header.
@@ -214,16 +201,16 @@ abstract class AbstractDataTable {
 	 * Render a single row.
 	 */
 	public function render_row( $row ) { ?>
-		<div class="table-row">
-			<?php
-			foreach( $this->get_columns() as $column ) {
-				if ( ! is_a( $column, '\EventManager\DataTables\Column' ) ) {
-					continue;
-				}
+		<tr>
+            <?php
+                foreach( $this->get_columns() as $column ) {
+                    if ( ! is_a( $column, '\EventManager\DataTables\Column' ) ) {
+                        continue;
+                    }
 
-				$this->render_row_item( $row, $column );
-			} ?>
-		</div>
+                    $this->render_row_item( $row, $column );
+                } ?>
+        </tr>
 	<?php
 	}
 
@@ -233,7 +220,7 @@ abstract class AbstractDataTable {
 	 * @param  array $row The row data.
 	 * @param  \EventManager\DataTables\Column $column The column this row item belongs to.
 	 */
-	public function render_row_item( $row, \EventManager\DataTables\Column $column ) {
+	public function render_row_item( $row, Column $column ) {
 		if ( ! is_a( $column, '\EventManager\DataTables\Column' ) ) {
 			return;
 		}
@@ -242,7 +229,7 @@ abstract class AbstractDataTable {
 		$signature = array( $this, $method );
 		$method_args = array( $row, $column ); ?>
 
-		<div class="<?php echo esc_attr( $column->get_id() ) ?>">
+		<td class="<?php echo esc_attr( $column->get_id() ) ?>">
 			<?php
 			if ( method_exists( $this, $method ) &&
 				 is_callable( $signature )
@@ -251,33 +238,7 @@ abstract class AbstractDataTable {
 			} else {
 				$this->render_default_item( $row, $column );
 			} ?>
-		</div>
+		</td>
 	<?php
-	}
-
-	public function render_footer() { ?>
-		<div class="table-footer">
-			<?php $this->render_pagination(); ?>
-		</div>
-	<?php
-	}
-
-	public function render_pagination() {
-		if ( $this->has_pagination() ) { ?>
-			<div class="pagination">
-				<?php echo $this->get_pagination_links(); ?>
-			</div>
-		<?php
-		}
-	}
-
-
-	/*
-	 * Get the pagination links for the current query. This is useful for updating the links via AJAX.
-	 *
-	 * @return string The pagination links.
-	 */
-	public function get_pagination_links() {
-		return paginate_links();
 	}
 }
