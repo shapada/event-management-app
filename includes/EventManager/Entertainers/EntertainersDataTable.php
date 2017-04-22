@@ -25,13 +25,24 @@ class EntertainersDataTable extends AbstractWPQueryDataTable {
 	}
 
 	/**
+	 * Render a entertainer type row item.
+	 *
+	 * @param  \WP_Post $row The row data.
+	 * @param  Column $column The column the row item belongs to.
+	 */
+	public function render_type_item( \WP_Post $row, Column $column ) {
+		echo 'Entertainer Type';
+		//$this->render_taxonomy_item( $row, $column, event_manager_core()->locations->location_taxonomy->get_name() );
+	}
+
+	/**
 	 * Render a location row item.
 	 *
 	 * @param  \WP_Post $row The row data.
 	 * @param  Column $column The column the row item belongs to.
 	 */
 	public function render_location_item( \WP_Post $row, Column $column ) {
-		echo 'Location Test';
+		echo 'Location';
 	}
 
 	/**
