@@ -69,31 +69,30 @@
           },
           editable: true,
           events: [{
-            title: 'Event 1',
+            title: 'Krusty the Clown',
             start: new Date(y, m, 1)
           }, {
-            title: 'Event 2',
+            title: 'Criss Angel',
             start: new Date(y, m, d - 5),
             end: new Date(y, m, d - 2)
           }, {
-            title: 'Event 3',
+            title: 'Brooks & Dunn',
             start: new Date(y, m, d, 10, 30),
             allDay: false
           }, {
-            title: 'Event 4',
+            title: 'Ron White',
             start: new Date(y, m, d + 14, 12, 0),
             end: new Date(y, m, d, 14, 0),
             allDay: false
           }, {
-            title: 'Event 5',
+            title: 'Dixie Chicks',
             start: new Date(y, m, d + 1, 19, 0),
             end: new Date(y, m, d + 1, 22, 30),
             allDay: false
           }, {
-            title: 'Event 6',
+            title: 'Jeff Foxworthy',
             start: new Date(y, m, 28),
-            end: new Date(y, m, 29),
-            url: 'http://google.com/'
+            end: new Date(y, m, 29)
           }]
         });
       });
