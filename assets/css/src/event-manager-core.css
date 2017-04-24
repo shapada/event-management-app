@@ -720,7 +720,7 @@ a:focus {
     position: relative;
     display: block;
     cursor: pointer;
-    margin: 0 0 50px 20px;
+    margin: 0 0 40px 20px;
 }
 .nav.side-menu>li>a {
     margin-bottom: 6px
