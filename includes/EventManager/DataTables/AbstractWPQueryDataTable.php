@@ -171,24 +171,9 @@ abstract class AbstractWPQueryDataTable extends AbstractDataTable {
 	 * @param  \EventManager\DataTables\Column $column The column this item belongs to.
 	 * @param  string $taxonomy The taxonomy slug
 	 */
-	public function render_taxonomy_item( \WP_Post $row, \EventManager\DataTables\Column $column, $taxonomy ) {
-		if ( ! is_a( $row, 'WP_Post' ) ) {
-			$this->render_default_item( $row, $column );
-		}
-
+	public function render_taxonomy_item( \WP_Post $row, Column $column, $taxonomy ) {
 		$terms = get_the_terms( $row->ID, $taxonomy );
-
-		if ( event_manager_core()->locations->location_taxonomy->get_name() === $taxonomy ) {
-			// If we have "All" we don't need the rest - there may be a better way to do this?
-			if ( has_term( 'All', $taxonomy, $row ) ) {
-				unset( $terms );
-				$terms[] = get_term_by( 'name', 'All', $taxonomy);
-			}
-
-			$this->render_location_item_terms( $terms );
-		} else {
-			$this->render_taxonomy_item_terms( $terms );
-		}
+        $this->render_taxonomy_item_terms( $terms );
 	}
 
 	/**
@@ -206,36 +191,6 @@ abstract class AbstractWPQueryDataTable extends AbstractDataTable {
 			$list[] = '<span class="term">' . esc_html( $term->name ) . '</span>';
 		}
 		echo implode( ', ', $list );
-	}
-
-	/**
-	 * Render the terms for a location row item.
-	 *
-	 * @param  array $terms The terms to render
-	 */
-	public function render_location_item_terms( $terms, $column = false ) {
-		// Bail if we have no terms
-		if ( empty( $terms ) ) {
-			return;
-		}
-
-		$termsHierarchy = array();
-		\EventManager\Helpers\sort_terms_hierarchically( $terms, $termsHierarchy );
-
-		if ( empty( $termsHierarchy ) ) {
-			return;
-		}
-
-		ob_start();
-
-		foreach ( $termsHierarchy as $term ) {
-			if ( ! is_a( $term, 'WP_Term' ) ) {
-				continue;
-			} ?>
-			<?php
-		}
-
-		ob_get_flush();
 	}
 
 	/**
