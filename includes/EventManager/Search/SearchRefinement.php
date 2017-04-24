@@ -1,5 +1,5 @@
 <?php
-namespace EventManager\Entertainers;
+namespace EventManager\Search;
 
 use EventManager\Refinement\AbstractRefinement;
 use EventManager\DataTables\Column;
@@ -7,9 +7,9 @@ use EventManager\DataTables\Column;
 /**
  * Class to manage refinement for the education CPT.
  */
-class EntertainersRefinement extends AbstractRefinement {
+class SearchRefinement extends AbstractRefinement {
 
-	protected $data_source = 'entertainers';
+	protected $data_source = 'search';
 
 	public $facets;
 
@@ -24,11 +24,10 @@ class EntertainersRefinement extends AbstractRefinement {
 	 * Setup data table.
 	 */
 	protected function set_data_table() {
-		$this->data_table = new EntertainersDataTable();
+		$this->data_table = new SearchDataTable();
 
 		$this->data_table->add_column( new Column( 'Name', 'title', true ) );
 		$this->data_table->add_column( new Column( 'Type', 'type' ) );
-		$this->data_table->add_column( new Column( 'Location', 'location' ) );
 
 		$this->data_table->set_facets( $this->facets );
 	}
