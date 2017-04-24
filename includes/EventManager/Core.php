@@ -18,6 +18,11 @@ class Core {
 	public $venue;
 
 	/**
+	 * @var \EventManager\Event
+	 */
+	public $event;
+
+	/**
 	 * @var \EventManager\Refinement
 	 */
 	public $refinement;
@@ -31,6 +36,7 @@ class Core {
 
 		$this->refinement = new Refinement();
 		$this->entertainer = new Entertainer();
+		//$this->event = new Event();
 		$this->venue = new Venue();
 
 		do_action( 'event_manager_core_init' );
@@ -43,6 +49,7 @@ class Core {
 
 		$this->refinement->register();
 		$this->entertainer->register();
+		//$this->event->register();
 		$this->venue->register();
 
 		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
