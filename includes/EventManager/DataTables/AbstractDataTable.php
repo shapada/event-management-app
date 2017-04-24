@@ -148,7 +148,7 @@ abstract class AbstractDataTable {
                 <?php
                     switch ( $column->is_sortable() ) {
                         case true: ?>
-                            <span><i class="fa fa-chevron-down"></i> <?php echo esc_html( $column->get_title() ) ?></span>
+                            <span><?php echo esc_html( $column->get_title() ) ?></span>
                             <?php
                             break;
 

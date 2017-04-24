@@ -28,7 +28,6 @@ class EntertainersRefinement extends AbstractRefinement {
 
 		$this->data_table->add_column( new Column( 'Name', 'title', true ) );
 		$this->data_table->add_column( new Column( 'Type', 'type' ) );
-		$this->data_table->add_column( new Column( 'Location', 'location' ) );
 
 		$this->data_table->set_facets( $this->facets );
 	}

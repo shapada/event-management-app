@@ -31,8 +31,7 @@ class VenuesDataTable extends AbstractWPQueryDataTable {
 	 * @param  Column $column The column the row item belongs to.
 	 */
 	public function render_type_item( \WP_Post $row, Column $column ) {
-		echo 'Venue Type';
-		//$this->render_taxonomy_item( $row, $column, event_manager_core()->locations->location_taxonomy->get_name() );
+		$this->render_taxonomy_item( $row, $column, event_manager_core()->venue->venue_type_taxonomy->get_name() );
 	}
 
 	/**
@@ -42,8 +41,7 @@ class VenuesDataTable extends AbstractWPQueryDataTable {
 	 * @param  Column $column The column the row item belongs to.
 	 */
 	public function render_location_item( \WP_Post $row, Column $column ) {
-		echo 'Location';
-		//$this->render_taxonomy_item( $row, $column, event_manager_core()->locations->location_taxonomy->get_name() );
+		$this->render_taxonomy_item( $row, $column, event_manager_core()->venue->venue_location_taxonomy->get_name() );
 	}
 
 	/**
