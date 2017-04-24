@@ -17,7 +17,7 @@ class EntertainersRefinement extends AbstractRefinement {
 	 * Set the facets.
 	 */
 	protected function set_facets() {
-		$this->facets = new SearchFacet( $this->data_source );
+		$this->facets = new EntertainersFacet( $this->data_source );
 	}
 
 	/**
